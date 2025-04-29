@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Buon Compleanno Anna!</title>
+  <style>
+    body {
+      background: #fff0f5;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #e91e63;
+      margin: 0;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .floaters {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floater {
+      position: absolute;
+      font-size: 2.5rem;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    button {
+      background: #ff4081;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: 0.3s ease;
+      z-index: 2;
+      position: relative;
+      margin-top: 30px;
+    }
+
+    button:hover {
+      background: #e91e63;
+    }
+
+    .message, .surprise, .image-container {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.3em;
+      z-index: 2;
+      position: relative;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .icons {
+      font-size: 2em;
+      margin-top: 10px;
+    }
+
+    .image-container img {
+      width: 400px;
+      max-width: 90vw;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #e91e63aa;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Birthdayyy Anna! 🎉</h1>
+  <div class="floaters" id="floaters"></div>
+
+  <div class="message" id="message">
+    <p>
+      Happy 23rd Birthdayyy you donut... <strong>Gracias</strong><br>
+      I don’t know what to say honestly so just brrrrrr<br>
+      Also you have the prettiest eyes I have seen<br>
+      May you have an amazing dayyy and life, but you already met me and it doesn’t get better than that.<br>
+      Buon compleanno, principessa! 🎂💃
+    </p>
+    <p class="icons">❤️ 🏛️ 🍕 🍝 🍷 🛵 🎭 💖</p>
+  </div>
+
+  <div class="image-container" id="image">
+    <img src="1.png" alt="Birthday Girl">
+  </div>
+
+  <div class="surprise" id="surprise">
+    🎂 TANTI AUGURI A TE! 🎶 <br>
+    Now go sleep! 😘
+  </div>
+
+  <button onclick="showSurprise()">Click me, amore!</button>
+
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mpeg">
+  </audio>
+  
+
+  <!-- Confetti Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <script>
+    const icons = ["❤️", "🏛️", "🍕", "🍝", "🍷", "🛵", "🎭", "💖"];
+
+    function createFloater() {
+      const floater = document.createElement('div');
+      floater.classList.add('floater');
+      floater.style.left = Math.random() * 100 + "vw";
+      floater.style.animationDuration = (Math.random() * 2 + 4) + "s";
+      floater.innerText = icons[Math.floor(Math.random() * icons.length)];
+      document.getElementById("floaters").appendChild(floater);
+      setTimeout(() => floater.remove(), 6000);
+    }
+
+    setInterval(createFloater, 300);
+
+    function showSurprise() {
+      document.getElementById("surprise").style.display = "block";
+      document.getElementById("message").style.display = "block";
+      document.getElementById("image").style.display = "block";
+      confetti({
+        particleCount: 300,
+        spread: 160,
+        scalar: 1.4,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
