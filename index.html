@@ -123,7 +123,6 @@
 
   <button onclick="showSurprise()">Click me, amore!</button>
 
-
   <!-- HBD Sound -->
   <audio id="hbd-sound" loop>
     <source src="hbd.wav" type="audio/wav">
@@ -158,26 +157,30 @@
     }
     setInterval(createFloater, 300);
 
-    // Load images
+    // Load and show first image
     function preloadImages() {
       for (let i = 1; i <= imageCount; i++) {
         const img = document.createElement('img');
         img.src = `${i}.png`;
         img.alt = `Image ${i}`;
+        img.loading = "eager";
         img.onerror = () => console.error(`Error loading image: ${img.src}`);
         imageElements.push(img);
         imageContainer.appendChild(img);
+      }
+
+      // Show the first image immediately
+      if (imageElements.length > 0) {
+        imageElements[0].classList.add("show");
       }
     }
 
     function startSlideshow() {
       setInterval(() => {
-        imageElements.forEach((img, index) => {
-          img.classList.remove("show");
-        });
+        imageElements.forEach(img => img.classList.remove("show"));
         imageElements[currentImage].classList.add("show");
         currentImage = (currentImage + 1) % imageCount;
-      }, 3000);
+      }, 2000);
     }
 
     function showSurprise() {
@@ -185,6 +188,7 @@
       document.getElementById("message").style.display = "block";
       imageContainer.style.display = "block";
 
+      // Play sounds
       const hbdSound = document.getElementById("hbd-sound");
       hbdSound.play().catch((error) => {
         console.error("Error playing HBD sound:", error);
