@@ -158,8 +158,11 @@
       document.getElementById("image").style.display = "block";
       
       // Play HBD sound
-      document.getElementById("hbd-sound").play();
-      
+      const hbdSound = document.getElementById("hbd-sound");
+      hbdSound.play().catch((error) => {
+        console.error("Error playing HBD sound:", error);
+      });
+
       // Confetti effect
       confetti({
         particleCount: 300,
@@ -169,7 +172,11 @@
       });
       
       // Play confetti sound
-      document.getElementById("confetti-sound").play();
+      const confettiSound = document.getElementById("confetti-sound");
+      confettiSound.play().catch((error) => {
+        console.error("Error playing confetti sound:", error);
+        throw new Error("Confetti sound failed to play");
+      });
     }
   </script>
 </body>
