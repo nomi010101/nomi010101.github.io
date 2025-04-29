@@ -66,7 +66,7 @@
       background: #e91e63;
     }
 
-    .message, .surprise, .image-container {
+    .message, .surprise {
       display: none;
       margin-top: 30px;
       font-size: 1.3em;
@@ -82,12 +82,30 @@
       margin-top: 10px;
     }
 
-    .image-container img {
+    .image-container {
+      display: none;
+      position: relative;
       width: 400px;
       max-width: 90vw;
+      height: 500px;
+      margin: 30px auto 0;
+      z-index: 2;
+    }
+
+    .image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      opacity: 0;
       border-radius: 15px;
       box-shadow: 0 0 20px #e91e63aa;
-      margin-top: 20px;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .image-container img.active {
+      opacity: 1;
     }
   </style>
 </head>
@@ -107,7 +125,12 @@
   </div>
 
   <div class="image-container" id="image">
-    <img src="1.png" alt="Birthday Girl">
+    <img src="1.png" alt="1" class="active">
+    <img src="2.png" alt="2">
+    <img src="3.png" alt="3">
+    <img src="4.png" alt="4">
+    <img src="5.png" alt="5">
+    <img src="6.png" alt="6">
   </div>
 
   <div class="surprise" id="surprise">
@@ -117,7 +140,7 @@
 
   <button onclick="showSurprise()">Click me, amore!</button>
 
-  <!-- Music -->
+  <!-- Background Music -->
   <audio autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mpeg">
   </audio>
@@ -156,7 +179,7 @@
       document.getElementById("surprise").style.display = "block";
       document.getElementById("message").style.display = "block";
       document.getElementById("image").style.display = "block";
-      
+
       // Play HBD sound
       const hbdSound = document.getElementById("hbd-sound");
       hbdSound.play().catch((error) => {
@@ -170,13 +193,27 @@
         scalar: 1.4,
         origin: { y: 0.6 }
       });
-      
+
       // Play confetti sound
       const confettiSound = document.getElementById("confetti-sound");
       confettiSound.play().catch((error) => {
         console.error("Error playing confetti sound:", error);
         throw new Error("Confetti sound failed to play");
       });
+
+      // Start image slideshow
+      cycleImages();
+    }
+
+    function cycleImages() {
+      const images = document.querySelectorAll("#image img");
+      let currentImage = 0;
+
+      setInterval(() => {
+        images[currentImage].classList.remove("active");
+        currentImage = (currentImage + 1) % images.length;
+        images[currentImage].classList.add("active");
+      }, 3000);
     }
   </script>
 </body>
