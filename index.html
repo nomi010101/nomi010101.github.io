@@ -117,10 +117,22 @@
 
   <button onclick="showSurprise()">Click me, amore!</button>
 
+  <!-- Music -->
   <audio autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mpeg">
   </audio>
-  
+
+  <!-- HBD Sound -->
+  <audio id="hbd-sound" loop>
+    <source src="hbd.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Confetti Sound -->
+  <audio id="confetti-sound">
+    <source src="confetti.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
 
   <!-- Confetti Script -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -144,12 +156,20 @@
       document.getElementById("surprise").style.display = "block";
       document.getElementById("message").style.display = "block";
       document.getElementById("image").style.display = "block";
+      
+      // Play HBD sound
+      document.getElementById("hbd-sound").play();
+      
+      // Confetti effect
       confetti({
         particleCount: 300,
         spread: 160,
         scalar: 1.4,
         origin: { y: 0.6 }
       });
+      
+      // Play confetti sound
+      document.getElementById("confetti-sound").play();
     }
   </script>
 </body>
